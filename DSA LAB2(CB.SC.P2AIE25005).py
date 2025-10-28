@@ -23,7 +23,7 @@ class DisjointSet:
 
 
 def kruskal(n, edges):
-    
+    # Sort edges by weight
     edges.sort(key=lambda x: x[2])
 
     ds = DisjointSet(n)
@@ -31,7 +31,7 @@ def kruskal(n, edges):
     total_weight = 0
 
     for u, v, w in edges:
-        if ds.find(u - 1) != ds.find(v - 1): 
+        if ds.find(u - 1) != ds.find(v - 1):  # adjusting for 1-based input
             ds.union(u - 1, v - 1)
             mst.append((u, v, w))
             total_weight += w
@@ -39,19 +39,22 @@ def kruskal(n, edges):
     return total_weight, mst
 
 
-
 if __name__ == "__main__":
-    n = 4  
-    edges = [
-        (1, 2, 1),
-        (2, 3, 2),
-        (4, 2, 4),
-        (1, 3, 3)
-    ]
-    print(" EDGES before finding the sort path",'\n', edges)
+    print("Kruskals Algorithm - Minimum Spanning Tree\n")
+
+    
+    n = int(input("Enter the number of vertices: "))
+    e = int(input("Enter the number of edges: "))
+
+    edges = []
+    print("\nEnter each edge in the format: source destination weight")
+    for i in range(e):
+        u, v, w = map(int, input(f"Edge {i+1}: ").split())
+        edges.append((u, v, w))
+
     total_weight, mst = kruskal(n, edges)
 
-    print("Edges in the Minimum Spanning Tree:")
+    print("\nEdges in the Minimum Spanning Tree:")
     for u, v, w in mst:
         print(f"{u} -- {v} == {w}")
 
