@@ -15,30 +15,32 @@ def build_max_heap(arr):
     for i in range(n // 2 - 1, -1, -1):
         max_heapify(arr, n, i)
 
-def extract_max(arr):
+def heap_sort(arr):
     n = len(arr)
-    if n == 0:
-        return None
-    arr[0], arr[-1] = arr[-1], arr[0]
-    max_val = arr.pop()
-    max_heapify(arr, len(arr), 0)
-    return max_val
+    build_max_heap(arr)
+    for i in range(n - 1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        max_heapify(arr, i, 0)
+    return arr
 
-n = int(input())
+n = int(input())10
 arr = list(map(int, input().split()))
-build_max_heap(arr)
-temp = arr.copy()
-sorted_list = []
-for _ in range(len(temp)):
-    sorted_list.append(extract_max(temp))
+
+
+heap_sort(arr)
+arr.reverse()  
+
 print("Sorted Customer Details")
-print(*sorted_list)
-valuable_customers = sorted_list[:3]
+print(*arr)
+
+valuable_customers = arr[:3]
 print("Valuable Customers")
 print(*valuable_customers)
-deleted_customers = sorted_list[-2:]
+
+deleted_customers = arr[-2:]
 print("Deleted Customers")
 print(*deleted_customers)
-updated_customers = sorted_list[:-2]
+
+updated_customers = arr[:-2]
 print("Customer Details after Deletion")
 print(*updated_customers)
