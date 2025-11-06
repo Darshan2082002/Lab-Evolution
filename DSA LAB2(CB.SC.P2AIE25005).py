@@ -23,7 +23,7 @@ class DisjointSet:
 
 
 def kruskal(n, edges):
-    # Sort edges by weight
+   
     edges.sort(key=lambda x: x[2])
 
     ds = DisjointSet(n)
@@ -31,7 +31,7 @@ def kruskal(n, edges):
     total_weight = 0
 
     for u, v, w in edges:
-        if ds.find(u - 1) != ds.find(v - 1):  # adjusting for 1-based input
+        if ds.find(u - 1) != ds.find(v - 1): 
             ds.union(u - 1, v - 1)
             mst.append((u, v, w))
             total_weight += w
